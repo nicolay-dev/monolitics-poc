@@ -49,14 +49,21 @@ Se identifican dos cuellos de botella importantes para los servicios de *Propert
 
 ### **Escenario 1:** Alta Concurrencia en Eventos de Dominio (Refined by Nicolay)
 
-- *Descripción:* Tiempo de respuesta en el servicio - de *Propiedades* debe /....
-- *Estímulo:* Solicitudes  simultáneas elevadas
-- *Ambiente:* Operación  bajo carga pico
-- *Artefacto:* Microservicio  de Propiedades
-- *Respuesta:*
-- *Medida de la respuesta:*
+- *Descripción:* Tiempo de respuesta en el servicio - de *Propiedades* debe
+- *Estímulo:* Alto volumen transaccional a nivel de operaciones requeridas por el servicio de Propiedades
+- *Ambiente:* Operación bajo estrés
+- *Artefacto:* Microservicio de Propiedades, Broker
+- *Respuesta:* El microservicio responde adecuadamente a las solicitudes de usuarios concurrentes
+- *Medida de la respuesta:* Se calcula que el servicio va a procesar en promedio de acuerdo con los datos del enunciado un aprox de
+Propiedades promedio por país: 260K
+Operaciones promedio por propiedad (micros publicadores): 2
+Es decir que en total pueda procesar 520k transacciones sin generar fallos en el sistema.
 - *Decisiones  Arquitecturales:*
-- *Justificación:*
+  - Puntos de sensibilidad: El microservicio de Propiedades debe ser capaz de soportar la integridad de la información y así mismo el broker debe poder soportar el volumen de datos.
+  - Tradeoff: Impacto en la complejidad  del sistema y en el auto-escalado
+  - Riesgo: Sobredimensionamiento, Saturación de cola de mensajes
+configurado
+- *Justificación:* Cuantitativamente,  la gestión de colas de mensajes  optimiza el flujo de solicitudes, desacoplando las operaciones asegurando  tiempos de respuesta más rápidos he independientes.  Cualitativamente,  el desacoplamiento  mediante  eventos  de dominio aumenta la independencia  y la robustez  de los servicios,  mejorando  la gestión de carga y la mantenibilidad del sistema.
 
 ## TODO:
 
