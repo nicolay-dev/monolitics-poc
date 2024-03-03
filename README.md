@@ -1,8 +1,62 @@
-# POC
+# Prueba de Concepto Apps NO Monolíticas
 
 ## Objetivo
 
-POC de la arquitectura de solución que su grupo está proponiendo. Dado que su arquitectura debe satisfacer la visión del negocio, no olvidé que su experimentación debe probar que la arquitectura propuesta nos va a ayudar a escalar el negocio a nivel global.
+Realizar una prueba de concepto sobre la arquitectura propuesta para satisfacer la visión del negocio de Propiedades de los Alpes, se debe probar que la arquitectura propuesta va a ayudar a escalar el negocio a nivel global.
+
+#### Requerimientos de calidad claves identificados:
+
+| Rendimiento | Mantenibilidad | Interoperatibilidad |
+| ----------- | -------------- | ------------------- |
+| Se requiere de una **experiencia de usuario fluida,  confiable y actualizada**, especialmente durante la expansión a nuevos lugares y mercados. El sistema debe poder crecer y adaptarse globalmente, evitando dificultades en el impacto de la **eficiencia operativa**, reduciendo costos y manteniendo la productividad en un nivel óptimo | Se requiere un sistema altamente **escalable, adaptable y flexible** tanto en términos tecnológicos como de recursos humanos. Esto implica una **arquitectura modular** y transparente que facilite actualizaciones, correcciones y mejoras. Además, la capacidad de realizar pruebas y depuraciones fácilmente es crucial para mantener la calidad del sistema a largo plazo. | La expansión a diferentes mercados demanda una **integración fluida con otros sistemas y servicios**, haciendo que la interoperabilidad sea crucial. El sistema debe integrarse efectivamente con sistemas existentes en cada mercado y cumplir con estándares y protocolos de comunicación. Esto aseguraría una transferencia de datos sin contratiempos entre los diversos sistemas involucrados en las operaciones comerciales e investigativas de la compañía. |
+
+## Arquitectura planteada
+
+Se plantea una arquitectura basada en eventos para suplir las necesidades actuales de propiedades de los alpes, dentro de las cuales se destacan:
+
+- Expansión global a multiples mercados y regiones.
+- Desacoplar la implementación monolitica actual que trae consigo diversos puntos de dolor a la hora de integrar nuevas funcionalidades y expandisrse a nuevos mercados
+- Se quiere tener una arquitectura altamente escalable, modificable y extensible en la parte tecnológica pero también de recursos humanos.
+- Soporte de grandes volumenes de información
+
+![Diagrama Componente Conector](./assets/images/Diagrama%20Componente%20Conector.png)
+_Diagrama 1. Componente & Conector (Punto de vista Funcional)_
+
+El diagrama ilustra el papel central de un broker como **gestor de eventos**, permitiendo establecer una **coreografía** dinámica de los microservicios en respuesta a las actualizaciones en el flujo operativo del negocio.
+
+Cada que se actualiza la información de las propiedades se hace una publicación sobre el topico **'UpdatePropertyInfo'** al cúal se encuentran suscritos los micorservicios de *Property y DataAudit*
+
+### Microservicios propuestos
+
+- **Property:** Microservicio especializado en las operaciones relacionadas con las propiedades, este almacena la información más actual de las propiedades. *(Modelo CRUD)*
+- **DataAdapter:** Dado que Propiedades de los Alpes desea expandir sus operaciones a otros paises, se plantea la construcción de este microservicio encargado de crear una interfaz que sea capaz de comunicarse con las diferentes fuentes y regulaciones de cada país. De esta forma se *desacopla el dominio de Propiedad de las fuentes de información.*
+- **DataAudit:** Automatiza el proceso de auditoría verificando registros que tengan un índice de confiabilidad menor a 0.8, este calculo se hace respecto a valores de *Fuente, Consistencia, Completitud*
+- **FieldResearch:** Microservicio que expone un endpoint para permitir a los investigadores de campo completar información relevante de las propiedades
+- **SalesContext:** Se especializa en manejar los contratos realizados sobre diferentes propiedades
+- **ClientManager:** Expone la información a los usuarios finales de aquellas propiedades que ya han completado el flujo de investigación y auditoria
+
+### Decisiones de diseño
+
+Con un enfoque de **Microservicios** se ve favorecida la **modularidad** para implementar interfaces o adaptadores que permitan la comunicación con servicios externos de los cuales no hay un estándar establecido de comunicación.
+
+la comunicación asíncrona, como un patrón orientado a **eventos**, es ideal para escenarios donde se necesita **desacoplar** los componentes y manejar **grandes volúmenes de datos**, al manejar una comunicación **asíncrona** se permite gestionar el flujo de la información a partir de eventos que son desencadenados por actualizaciones de la información.
+
+### Puntos de sensibilidad detectados
+
+Se identifican dos cuellos de botella importantes para los servicios de *Property* y *DataAudit* estos microservicios deben manejar un gran volumen de solicitudes y concurrencia
+
+## Escenarios de calidad a probar
+
+### **Escenario 1:** Alta Concurrencia en Eventos de Dominio (Refined by Nicolay)
+
+- *Descripción:* Tiempo de respuesta en el servicio - de *Propiedades* debe /....
+- *Estímulo:* Solicitudes  simultáneas elevadas
+- *Ambiente:* Operación  bajo carga pico
+- *Artefacto:* Microservicio  de Propiedades
+- *Respuesta:*
+- *Medida de la respuesta:*
+- *Decisiones  Arquitecturales:*
+- *Justificación:*
 
 ## TODO:
 
@@ -59,8 +113,8 @@ DEBIZIUM: Tiene tabla de transacciones (Manejado por estado) (EventSourcing)
 
 ## Deben ser claros los principios de DDD en el diseño: agregaciones, contextos acotados, inversión de dependencias, capas, etc
 
-Refinamiento de los escenarios
-Construcción de los micros - La comunicación BD
+Refinamiento de los escenarios - todos
+Construcción de los micros - La comunicación BD - Nico
 configurar en cada micro la comunicación por comandos y eventos
-Construir Componente pulsar
+Construir Componente pulsar - luis
 Despliegue
