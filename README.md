@@ -65,6 +65,25 @@ Es decir que en total pueda procesar 520k transacciones sin generar fallos en el
 configurado
 - *Justificación:* Cuantitativamente,  la gestión de colas de mensajes  optimiza el flujo de solicitudes, desacoplando las operaciones asegurando  tiempos de respuesta más rápidos he independientes.  Cualitativamente,  el desacoplamiento  mediante  eventos  de dominio aumenta la independencia  y la robustez  de los servicios,  mejorando  la gestión de carga y la mantenibilidad del sistema.
 
+### **Escenario 4:** Integración de Nuevos Mercados (Refined by Juan)
+
+- *Descripción:* Agregar soporte para un nuevo mercado con reglas de negocio y terminología local.
+- *Estímulo:* Requerimiento para soportar un nuevo país con sus especificidades legales y de negocio.
+- *Ambiente:* Desarrrollo
+- *Artefacto:* Microservicio de información corporativa
+- *Respuesta:* El sistema incorpora el nuevo mercado sin afectar los existentes.
+- *Medida de la respuesta:* Incorporación en menos de 2 semanas.
+- *Decisiones  Arquitecturales:*
+  - *Microservicio DataAdapter*
+    - Puntos de sensibilidad: Rendimiento óptimo a la hora de acceder a los datos.
+    - Tradeoff: La capacidad de adaptación puede afectar la facilidad de mantenimiento y entendimiento del código.
+    - Riesgo: Dada la cantidad de diferentes regiones que se pueden cubrir, puede haber cierto tipo de datos que no puedan ser manejados adecuadamente.
+  - *Pull a servicios externos*
+    - Puntos de sensibilidad: Sensibilidad en el tiempo de obtener los datos.
+    - Tradeoff: Mayor control de los datos pero puede haber retardo en actualización
+    - Riesgo: La seguridad de pull de datos debe ser más robusta.
+- *Justificación:* La arquitectura basada en microservicios facilita la expansión a nuevos mercados al permitir la adición de servicios específicos por mercado, manteniendo el sistema cohesivo y manejable.
+
 ## TODO:
 
 ## Refinar y elegir los tres escenarios de calidad que vamos a utilizar con base en los comentarios de la entrega anterior
