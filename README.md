@@ -84,6 +84,19 @@ configurado
     - Riesgo: La seguridad de pull de datos debe ser más robusta.
 - *Justificación:* La arquitectura basada en microservicios facilita la expansión a nuevos mercados al permitir la adición de servicios específicos por mercado, manteniendo el sistema cohesivo y manejable.
 
+### **Escenario 8:** Actualización de datos (Refined by Luis)  
+- *Descripción:* Mantener la consistencia de datos entre microservicios relacionados.
+- *Estímulo:* Ejecución de la auditoria de datos para verificación de confiabilidad
+- *Ambiente:* Operación normal en desarrollo y producción
+- *Artefacto:* Miroservicio de data audit
+- *Respuesta:* Obtención de los indices de confiabilidad de los datos 
+- *Medida de la respuesta:* Deben generarse en menos de 2 segundos.
+- *Decisiones  Arquitecturales:*
+    - Puntos de sensibilidad: Actualziación de los datos y complejidad en la gestión de eventos
+    - Tradeoff:	El uso de tópicos incremente la latencia entre microservicios y la complejidad de publicación, suscripción y enrutamiento de eventos puede agregar complejidad al sistema
+    - Riesgo: No tener los valores de confiabilidad actualizados
+- *Justificación:*  La propagación de eventos asegura la coherencia entre los microservisios, escencial para la interoperabilidad efectiva dentro de una arquitectura basada en eventos. 
+
 ### TODO:
 
 #### [✅] Refinar y elegir los tres escenarios de calidad que vamos a utilizar con base en los comentarios de la entrega anterior
