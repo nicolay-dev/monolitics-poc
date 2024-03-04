@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+  pulsar:
+    image: apachepulsar/pulsar:2.9.1
+    container_name: pulsar
+    command: bin/pulsar standalone
+    ports:
+      - "6650:6650"
+      - "8080:8080"
+    volumes:
+      - pulsar-data:/pulsar/data
+      - pulsar-conf:/pulsar/conf
+      - ./start-pulsar.sh:/pulsar/start-pulsar.sh
+      - ./debezium-postgres-source-config.yaml:/pulsar/conf/debezium-postgres-source-config.yaml
+      - ./pulsar-io-debezium-postgres-2.9.1.nar:/pulsar/conf/pulsar-io-debezium-postgres-2.9.1.nar
+    networks:
+      - debezium-net
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - debezium-net
+
+networks:
+  debezium-net:
+    name: debezium-net
+    driver: bridge
+
+volumes:
+  pulsar-data:
+  pulsar-conf:
+  postgres-data:

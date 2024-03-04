@@ -1,0 +1,16 @@
+tenant: "public"
+namespace: "default"
+name: "debezium-postgres-source"
+topicName: "debezium-postgres-topic"
+archive: "/pulsar/conf/pulsar-io-debezium-postgres-2.9.1.nar"
+parallelism: 1
+configs:
+  database.hostname: "postgres"  # Usa el nombre del servicio de Docker Compose
+  database.port: "5432"
+  database.user: "postgres"
+  database.password: "postgres"
+  database.dbname: "postgres"
+  database.server.name: "dbserver1"
+  database.whitelist: "public"
+  
+  pulsar.service.url: "pulsar://pulsar:6650"  # Usa el nombre del servicio de Pulsar

@@ -1,0 +1,14 @@
+docker-compose up -d
+
+docker exec -it pulsar /bin/bash
+
+./bin/pulsar-admin topics list public/default
+
+./bin/pulsar-admin source localrun --source-config-file /pulsar/conf/debezium-postgres-source-config.yaml --destination-topic-name debezium-postgres-topic
+
+
+./bin/pulsar-client consume -s "sub-datos" public/default/debezium-postgres-topic -n 0
+
+
+Quiero enviar un mensaje de hola mundo por el tópico de pulsar: 
+debezium-postgres-topic
