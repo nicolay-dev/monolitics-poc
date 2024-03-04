@@ -2,18 +2,21 @@
 class PropertyModel:
     def __init__(
             self,
-            externalData: str,
-            fieldResearch: str,
-            salesContext: str,
+            external_data: str,
+            field_research: str,
+            sales_context: str,
+            id_property: int = None,
     ): 
-        self.externalData = externalData
-        self.fieldResearch = fieldResearch
-        self.salesContext = salesContext
+        self.id_property = id_property
+        self.external_data = external_data
+        self.field_research = field_research
+        self.sales_context = sales_context
     
     def to_dict(self):
         return {
-            "externalData": self.externalData,
-            "fieldResearch": self.fieldResearch,
-            "salesContext": self.salesContext,
+            "id_property": self.id_property,
+            "external_data": self.external_data,
+            "field_research": self.field_research,
+            "sales_context": self.sales_context,
         }
     
