@@ -1,7 +1,8 @@
 
-class PropertyModel:
+class PropertyAuditModel:
     def __init__(
             self,
+            score_audit: int,
             external_data: str,
             field_research: str,
             sales_context: str,
@@ -11,6 +12,7 @@ class PropertyModel:
         self.external_data = external_data
         self.field_research = field_research
         self.sales_context = sales_context
+        self.score_audit = score_audit
     
     def to_dict(self):
         return {
@@ -18,5 +20,6 @@ class PropertyModel:
             "external_data": self.external_data,
             "field_research": self.field_research,
             "sales_context": self.sales_context,
+            "score_audit": self.score_audit
         }
     

@@ -16,5 +16,15 @@ class PropertyEntity(Base):
     field_research = Column(String(100))
     sales_context = Column(String(100))
 
+
+class PropertyAuditEntity(Base):
+    __tablename__ = 'properties_audit'
+
+    id_property = Column(Integer, primary_key=True, index=True)
+    external_data = Column(String(100))
+    field_research = Column(String(100))
+    sales_context = Column(String(100))     
+    score_audit = Column(String(100))
+
 Base.metadata.create_all(bind=engine)
     
