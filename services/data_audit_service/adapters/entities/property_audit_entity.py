@@ -18,7 +18,7 @@ class PropertyEntity(Base):
 
 
 class PropertyAuditEntity(Base):
-    __tablename__ = 'properties_audit'
+    __tablename__ = 'properties_audit' 
 
     id_property = Column(Integer, primary_key=True, index=True)
     external_data = Column(String(100))

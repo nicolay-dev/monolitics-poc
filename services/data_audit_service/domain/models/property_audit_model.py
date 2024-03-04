@@ -1,4 +1,5 @@
 
+
 class PropertyAuditModel:
     def __init__(
             self,

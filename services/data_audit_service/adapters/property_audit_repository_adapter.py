@@ -9,7 +9,7 @@ class PropertyAuditRepositoryAdapter(PropertyAuditRepository):
     def create_property(self, property: PropertyAuditModel) -> PropertyAuditModel:
         try:
             db_es = PropertyAuditEntity(
-                id_property = property.id,
+                id_property = property.id_property,
                 external_data = property.external_data,
                 field_research = property.field_research,
                 sales_context = property.sales_context,
@@ -48,12 +48,10 @@ class PropertyAuditRepositoryAdapter(PropertyAuditRepository):
                     external_data = es.external_data,
                     field_research = es.field_research,
                     sales_context = es.sales_context,
-                    PropertyAuditEntity = es.score_audit
+                    score_audit = es.score_audit
                 ).to_dict()
                 for es in db_es
-            ]
-            
-            
+            ]            
             db.add(db_es)
             db.commit()
         except Exception as exception:
