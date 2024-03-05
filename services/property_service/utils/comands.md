@@ -2,11 +2,12 @@
 
 ## Para Crear el env
 
-python -m venv venv
+python -m venv venv 
 
 ## Para Activar el env
 
-.\venv\Scripts\Activate.ps1
+.\venv\Scripts\Activate.ps1 (Windows)
+source venv/bin/activate (MacOs)
 
 ## Para instalar dependencias
 
@@ -26,3 +27,11 @@ pip install psycopg2
 ## Actualizar el archivo de dependencias después de instalar una dependencia
 
 pip freeze > requirements.txt
+
+## Para ejecutar pulsar (cd services/pulsar)
+
+docker compose up -d
+
+## Eliminar todos los containers de docker
+
+docker rm -f $(docker ps -aq)
