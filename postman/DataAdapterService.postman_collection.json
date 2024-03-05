@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "a53f6a01-41fb-4acd-a9e3-65a97bdddcd5",
+		"name": "DataAdapterService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23891647"
+	},
+	"item": [
+		{
+			"name": "Pull data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"api_url\": \"https://jsonplaceholder.typicode.com/users/4\",\r\n    \"json_keys\": [\"id\", \"name\", \"email\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/add-data_adapter",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"add-data_adapter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/get-data_adapters",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"get-data_adapters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/get-data_adapter/704382",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"get-data_adapter",
+						"704382"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update data",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"external_data\": \"id: 3, name: Clementine Quintero, email: Nathan@yesenia.net\",\r\n    \"id_adapter\": 704382\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/update-data_adapter",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"update-data_adapter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete data",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/delete-data_adapter/704381",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"delete-data_adapter",
+						"704381"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
