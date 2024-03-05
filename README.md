@@ -70,7 +70,7 @@ configurado
 - *Descripción:* Agregar soporte para un nuevo mercado con reglas de negocio y terminología local.
 - *Estímulo:* Requerimiento para soportar un nuevo país con sus especificidades legales y de negocio.
 - *Ambiente:* Desarrrollo
-- *Artefacto:* Microservicio de información corporativa
+- *Artefacto:* Microservicio de dataAdapter
 - *Respuesta:* El sistema incorpora el nuevo mercado sin afectar los existentes.
 - *Medida de la respuesta:* Incorporación en menos de 2 semanas.
 - *Decisiones  Arquitecturales:*
