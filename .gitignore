@@ -2,3 +2,5 @@ venv*
 env*
 __pycache__*
 .venv*
+services/pulsar/data/bookkeeper/*
+services/pulsar/data/zookeeper/*
