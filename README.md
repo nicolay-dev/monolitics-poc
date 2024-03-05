@@ -95,9 +95,20 @@ configurado
     - Puntos de sensibilidad: Actualziación de los datos y complejidad en la gestión de eventos
     - Tradeoff:	El uso de tópicos incremente la latencia entre microservicios y la complejidad de publicación, suscripción y enrutamiento de eventos puede agregar complejidad al sistema
     - Riesgo: No tener los valores de confiabilidad actualizados
-- *Justificación:*  La propagación de eventos asegura la coherencia entre los microservisios, escencial para la interoperabilidad efectiva dentro de una arquitectura basada en eventos. 
+- *Justificación:*  La propagación de eventos asegura la coherencia entre los microservisios, escencial para la interoperabilidad efectiva dentro de una arquitectura basada en eventos.
 
 ### TODO:
+
+|Tarea|Responsable|
+|-----|-----------|
+| Refinamiento de los escenarios|Todos|
+| Refinamiento de diagrama |Todos|
+| Documentar decisiones | Todos |
+| Construcción de micro base - y comunicación BD|Nico|
+| Replicar micro data_audit |Luis|
+| Replicar micro data-adapter |JuanCa|
+| Comunicación pulsar | Luis - Nico |
+| Despliegue | ? |
 
 #### [✅] Refinar y elegir los tres escenarios de calidad que vamos a utilizar con base en los comentarios de la entrega anterior
 
@@ -149,16 +160,4 @@ DEBIZIUM: Tiene tabla de transacciones (Manejado por estado) (EventSourcing)
 #### [ ] Grabar video
 
 #### [ ] Documentar con la descripción de actividades realizada por cada miembro
-
-Refinamiento de los escenarios - todos
-Construcción de los micros - La comunicación BD - Nico
-configurar en cada micro la comunicación por comandos y eventos
-Construir Componente pulsar - luis
-Despliegue
-
-
-
-
-
-Actualizar diagrama para justificar comunicación por eventos
 
