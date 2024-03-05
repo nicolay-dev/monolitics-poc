@@ -3,7 +3,7 @@ import pulsar
 client = pulsar.Client('pulsar://localhost:6650')
 
 subscription_name = 'listener-propiedades-audit-subscription'
-topic = 'persistent://public/default/comando-propiedades-audit-topic'
+topic = 'persistent://public/default/comando-data-adapter-topic'
 
 consumer = client.subscribe(topic, subscription_name)
 
