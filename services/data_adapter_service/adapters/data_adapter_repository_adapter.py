@@ -81,12 +81,13 @@ class DataAdapterRepositoryAdapter(DataAdapterRepository):
                 f'Ha ocurrido un error actualizando los datos adaptados, revisar {exception}'
             )
 
-    def delete_data_adapter(self, adapter_id: int) -> None:
+    def delete_data_adapter(self, adapter_id: int):
         try:
 
             db_es = (db.query(DataAdapterEntity).filter(DataAdapterEntity.id_adapter == adapter_id).first())
             db.delete(db_es)
             db.commit()
+            return True
 
         except Exception as exception:
             raise NameError(

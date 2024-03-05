@@ -22,5 +22,5 @@ class DataAdapterRepository(ABC):
         pass
 
     @abstractmethod
-    def delete_data_adapter(self, data_adapter_id: int) -> None:
+    def delete_data_adapter(self, data_adapter_id: int) -> bool:
         pass

@@ -58,4 +58,6 @@ class ApiRest:
 
     @app.route('/api/delete-data_adapter/<int:data_adapter_id>', methods=['DELETE'])
     def delete_data_adapter_api(data_adapter_id: int):
-        return data_adapter_use_case.delete_data_adapter(data_adapter_id)
+        response = data_adapter_use_case.delete_data_adapter(data_adapter_id)
+        return { 'message': response }, 200
+    

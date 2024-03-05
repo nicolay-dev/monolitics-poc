@@ -19,5 +19,5 @@ class DataAdapterUseCase:
     def update_data_adapter(self, data_adapter: DataAdapterModel) -> DataAdapterModel:
         return self.data_adapter_repository.update_data_adapter(data_adapter)
 
-    def delete_data_adapter(self, data_adapter_id: int) -> None:
+    def delete_data_adapter(self, data_adapter_id: int) -> bool:
         return self.data_adapter_repository.delete_data_adapter(data_adapter_id)
