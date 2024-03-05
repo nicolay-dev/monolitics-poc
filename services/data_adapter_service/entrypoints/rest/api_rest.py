@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+import pulsar
 from adapters.data_adapter_repository_adapter import DataAdapterRepositoryAdapter
 from domain.use_cases.data_adapter_use_case import DataAdapterUseCase
 from domain.models.data_adapter_model import DataAdapterModel
@@ -6,6 +7,9 @@ from domain.models.data_adapter_model import DataAdapterModel
 
 app = Flask(__name__)
 
+client = pulsar.Client('pulsar://localhost:6650')
+
+producer = client.create_producer('persistent://public/default/comando-data-adapter-topic')
 
 data_adapter_repository = DataAdapterRepositoryAdapter()
 data_adapter_use_case = DataAdapterUseCase(data_adapter_repository)
@@ -27,6 +31,11 @@ class ApiRest:
         json_keys = data.get('json_keys', [])
 
         response = data_adapter_use_case.create_data_adapter(api_url, json_keys)
+        
+        message = str(data).encode('utf-8')
+        producer.send(message)
+        
+        
         return {
             "response": response
         }
