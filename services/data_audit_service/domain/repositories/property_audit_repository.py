@@ -10,7 +10,7 @@ class PropertyAuditRepository(ABC):
         pass
 
     @abstractmethod
-    def get_property_by_id(self, property_id: int) -> PropertyAuditModel:
+    def get_property_by_id(self, id_property: int) -> PropertyAuditModel:
         pass
 
     @abstractmethod
@@ -22,5 +22,5 @@ class PropertyAuditRepository(ABC):
         pass
 
     @abstractmethod
-    def delete_property(self, property_id: int) -> None:
+    def delete_property(self, id_property: int) -> bool:
         pass

@@ -10,7 +10,7 @@ class PropertyRepository(ABC):
         pass
 
     @abstractmethod
-    def get_property_by_id(self, property_id: int) -> PropertyModel:
+    def get_property_by_id(self, id_property: int) -> PropertyModel:
         pass
 
     @abstractmethod
@@ -22,5 +22,5 @@ class PropertyRepository(ABC):
         pass
 
     @abstractmethod
-    def delete_property(self, property_id: int) -> None:
+    def delete_property(self, id_property: int) -> bool:
         pass

@@ -10,8 +10,8 @@ class PropertyUseCase:
     def create_property(self, property: PropertyAuditModel) -> PropertyAuditModel:
         return self.property_repository.create_property(property)
 
-    def get_property(self, property_id: int) -> PropertyAuditModel:
-        return self.property_repository.get_property_by_id(property_id)
+    def get_property(self, id_property: int) -> PropertyAuditModel:
+        return self.property_repository.get_property_by_id(id_property)
 
     def get_properties(self) -> PropertyAuditModel:
         return self.property_repository.get_properties()
@@ -19,5 +19,5 @@ class PropertyUseCase:
     def update_property(self, property: PropertyAuditModel) -> PropertyAuditModel:
         return self.property_repository.update_property(property)
 
-    def delete_property(self, property_id: int) -> None:
-        return self.property_repository.delete_property(property_id)
+    def delete_property(self, id_property: int) -> bool:
+        return self.property_repository.delete_property(id_property)

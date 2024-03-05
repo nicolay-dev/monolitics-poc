@@ -16,14 +16,15 @@ class PropertyRepositoryAdapter(PropertyRepository):
             )
             db.add(db_es)
             db.commit()
+            return property.to_dict()
         except Exception as exception:
             raise NameError(
                 f'Ha ocurrido un error creando la propiedad, revisar {exception}'
             )
 
-    def get_property_by_id(self, property_id: int) -> PropertyModel:
+    def get_property_by_id(self, id_property: int) -> PropertyModel:
         try:
-            db_es = (db.query(PropertyEntity).filter(PropertyEntity.id_property == property_id).first())
+            db_es = (db.query(PropertyEntity).filter(PropertyEntity.id_property == id_property).first())
             if db_es is not None:
                 return PropertyModel(
                     id_property=db_es.id_property,
@@ -42,7 +43,7 @@ class PropertyRepositoryAdapter(PropertyRepository):
             db_es = db.query(PropertyEntity).all()
             return [
                 PropertyModel(
-                    id_property = es.id,
+                    id_property = es.id_property,
                     external_data = es.external_data,
                     field_research = es.field_research,
                     sales_context = es.sales_context
@@ -61,8 +62,9 @@ class PropertyRepositoryAdapter(PropertyRepository):
     def update_property(self, property: PropertyModel) -> PropertyModel:
         try:
 
-            db_es = (db.query(PropertyEntity).filter(PropertyEntity.id_property == property.property_id).first())
+            db_es = (db.query(PropertyEntity).filter(PropertyEntity.id_property == property.id_property).first())
 
+            db_es.id_property = db_es.id_property
             db_es.external_data = property.external_data
             db_es.field_research = property.field_research
             db_es.sales_context = property.sales_context
@@ -73,12 +75,13 @@ class PropertyRepositoryAdapter(PropertyRepository):
                 f'Ha ocurrido un error actualizando la propiedad, revisar {exception}'
             )
 
-    def delete_property(self, property_id: int) -> None:
+    def delete_property(self, id_property: int):
         try:
 
-            db_es = (db.query(PropertyEntity).filter(PropertyEntity.id_property == property_id).first())
+            db_es = (db.query(PropertyEntity).filter(PropertyEntity.id_property == id_property).first())
             db.delete(db_es)
             db.commit()
+            return True
 
         except Exception as exception:
             raise NameError(

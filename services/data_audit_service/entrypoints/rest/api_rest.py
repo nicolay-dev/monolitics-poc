@@ -27,6 +27,7 @@ class ApiRest:
     def add_property_api():
         data: dict = request.get_json()
         property_data = PropertyAuditModel(
+            id_property=data.get('id_property'),
             external_data = data.get('external_data'),
             field_research = data.get('field_research'),
             sales_context = data.get('sales_context'),
@@ -38,11 +39,11 @@ class ApiRest:
         producer.send(message)
         return {
             "response": response
-        }
+        }, 200
     
-    @app.route('/api/get-property-audit/<int:property_id>', methods=['GET'])
-    def get_property_api(property_id : int):
-        property = property_use_case.get_property(property_id)
+    @app.route('/api/get-property-audit/<int:id_property>', methods=['GET'])
+    def get_property_api(id_property : int):
+        property = property_use_case.get_property(id_property)
         return {
             "property": property
         }
@@ -51,6 +52,7 @@ class ApiRest:
     def update_property_api():
         data: dict = request.get_json()
         property_data = PropertyAuditModel(
+            id_property= data.get('id_property'),
             external_data = data.get('external_data'),
             field_research = data.get('field_research'),
             sales_context = data.get('sales_context'),
@@ -68,6 +70,7 @@ class ApiRest:
             "properties": properties
         }
 
-    @app.route('/api/delete-properties/<int:property_id>', methods=['DELETE'])
-    def delete_property_api(property_id: int):
-        return property_use_case.delete_property(property_id)
+    @app.route('/api/delete-properties/<int:id_property>', methods=['DELETE'])
+    def delete_property_api(id_property: int):
+        response = property_use_case.delete_property(id_property)
+        return { 'message': response }, 200

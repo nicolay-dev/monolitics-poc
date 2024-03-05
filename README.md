@@ -144,7 +144,7 @@ DEBIZIUM: Tiene tabla de transacciones (Manejado por estado) (EventSourcing)
 
 #### [✅] El código debe encontrarse en un software de control de versionamiento como Github
 
-[Repo]<https://github.com/nicolay-dev/monolitics-poc>
+[Repositorio](https://github.com/nicolay-dev/monolitics-poc)
 
 #### [ ] Grabar video
 
@@ -155,3 +155,10 @@ Construcción de los micros - La comunicación BD - Nico
 configurar en cada micro la comunicación por comandos y eventos
 Construir Componente pulsar - luis
 Despliegue
+
+
+
+
+
+Actualizar diagrama para justificar comunicación por eventos
+

@@ -11,7 +11,7 @@ client = pulsar.Client('pulsar://localhost:6650')
 
 producer = client.create_producer('persistent://public/default/comando-propiedades-topic')
 
-#for i in range(10):
+# for i in range(10):
 #    producer.send(('Hello-%d' % i).encode('utf-8'))
 
 property_repository = PropertyRepositoryAdapter()
@@ -29,7 +29,6 @@ class ApiRest:
     @app.route('/api/add-property', methods=['POST'])
     def add_property_api():
         data: dict = request.get_json()
-        print(data)
         property_data = PropertyModel(
             id_property=data.get('id_property'),
             external_data = data.get('external_data'),
@@ -42,11 +41,11 @@ class ApiRest:
         
         return {
             "response": response
-        }
+        }, 200
     
-    @app.route('/api/get-property/<int:property_id>', methods=['GET'])
-    def get_property_api(property_id : int):
-        property = property_use_case.get_property(property_id)
+    @app.route('/api/get-property/<int:id_property>', methods=['GET'])
+    def get_property_api(id_property : int):
+        property = property_use_case.get_property(id_property)
         return {
             "property": property
         }
@@ -55,6 +54,7 @@ class ApiRest:
     def update_property_api():
         data: dict = request.get_json()
         property_data = PropertyModel(
+            id_property= data.get('id_property'),
             external_data = data.get('external_data'),
             field_research = data.get('field_research'),
             sales_context = data.get('sales_context'),
@@ -71,6 +71,7 @@ class ApiRest:
             "properties": properties
         }
 
-    @app.route('/api/delete-properties/<int:property_id>', methods=['DELETE'])
-    def delete_property_api(property_id: int):
-        return property_use_case.delete_property(property_id)
+    @app.route('/api/delete-properties/<int:id_property>', methods=['DELETE'])
+    def delete_property_api(id_property: int):
+        response = property_use_case.delete_property(id_property)
+        return { 'message': response }, 200
