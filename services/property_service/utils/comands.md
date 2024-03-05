@@ -35,3 +35,10 @@ docker compose up -d
 ## Eliminar todos los containers de docker
 
 docker rm -f $(docker ps -aq)
+
+## Crear topico 
+./bin/pulsar-admin topics create "persistent://public/default/comando-propiedades-topic"
+
+
+## Consumir topico
+./bin/pulsar-client consume -s "sub-datos" public/default/comando-propiedades-topic -n 0

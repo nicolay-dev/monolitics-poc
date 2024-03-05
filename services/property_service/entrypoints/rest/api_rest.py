@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-
+import pulsar
 from adapters.property_repository_adapter import PropertyRepositoryAdapter
 from domain.use_cases.property_use_case import PropertyUseCase
 from domain.models.property_model import PropertyModel
@@ -7,6 +7,12 @@ from domain.models.property_model import PropertyModel
 
 app = Flask(__name__)
 
+client = pulsar.Client('pulsar://localhost:6650')
+
+producer = client.create_producer('persistent://public/default/comando-propiedades-topic')
+
+#for i in range(10):
+#    producer.send(('Hello-%d' % i).encode('utf-8'))
 
 property_repository = PropertyRepositoryAdapter()
 property_use_case = PropertyUseCase(property_repository)
@@ -23,12 +29,17 @@ class ApiRest:
     @app.route('/api/add-property', methods=['POST'])
     def add_property_api():
         data: dict = request.get_json()
+        print(data)
         property_data = PropertyModel(
+            id_property=data.get('id_property'),
             external_data = data.get('external_data'),
             field_research = data.get('field_research'),
             sales_context = data.get('sales_context'),
         )
-        response = property_use_case.create_property(property_data)
+        response = property_use_case.create_property(property_data)        
+        message = str(data).encode('utf-8')
+        producer.send(message)
+        
         return {
             "response": response
         }

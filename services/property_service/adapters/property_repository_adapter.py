@@ -9,7 +9,7 @@ class PropertyRepositoryAdapter(PropertyRepository):
     def create_property(self, property: PropertyModel) -> PropertyModel:
         try:
             db_es = PropertyEntity(
-                id_property = property.id,
+                id_property = property.id_property,
                 external_data = property.external_data,
                 field_research = property.field_research,
                 sales_context = property.sales_context
