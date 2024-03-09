@@ -1,14 +1,12 @@
-from flask import Flask, jsonify, request
+from flask import Blueprint, Flask, jsonify, request
 import pulsar
 from adapters.data_adapter_repository_adapter import DataAdapterRepositoryAdapter
 from domain.use_cases.data_adapter_use_case import DataAdapterUseCase
 from domain.models.data_adapter_model import DataAdapterModel
 
-
-app = Flask(__name__)
+api_rest_blueprint = Blueprint('api_rest', __name__)
 
 client = pulsar.Client('pulsar://localhost:6650')
-
 producer = client.create_producer('persistent://public/default/comando-data-adapter-topic')
 
 data_adapter_repository = DataAdapterRepositoryAdapter()
@@ -16,14 +14,14 @@ data_adapter_use_case = DataAdapterUseCase(data_adapter_repository)
 
 class ApiRest:
 
-    @app.route('/api/ping', methods=['GET'])
+    @api_rest_blueprint.route('/api/ping', methods=['GET'])
     def test_api():
         response = 'pong'
         return {
             "response": response
         }
 
-    @app.route('/api/add-data_adapter', methods=['POST'])
+    @api_rest_blueprint.route('/api/add-data_adapter', methods=['POST'])
     def add_data_adapter_api():
         data: dict = request.get_json()
 
@@ -40,14 +38,14 @@ class ApiRest:
             "response": response
         }
     
-    @app.route('/api/get-data_adapter/<int:data_adapter_id>', methods=['GET'])
+    @api_rest_blueprint.route('/api/get-data_adapter/<int:data_adapter_id>', methods=['GET'])
     def get_data_adapter_api(data_adapter_id : int):
         data_adapter = data_adapter_use_case.get_data_adapter_by_id(data_adapter_id)
         return {
             "data_adapter": data_adapter
         }
     
-    @app.route('/api/update-data_adapter', methods=['PUT'])
+    @api_rest_blueprint.route('/api/update-data_adapter', methods=['PUT'])
     def update_data_adapter_api():
         data: dict = request.get_json()
         data_adapter_data = DataAdapterModel(
@@ -58,14 +56,14 @@ class ApiRest:
             "response": response
         }
     
-    @app.route('/api/get-data_adapters', methods=['GET'])
+    @api_rest_blueprint.route('/api/get-data_adapters', methods=['GET'])
     def get_data_adapters_api():
         data_adapters = data_adapter_use_case.get_data_adapters()
         return {
             "data_adapters": data_adapters
         }
 
-    @app.route('/api/delete-data_adapter/<int:data_adapter_id>', methods=['DELETE'])
+    @api_rest_blueprint.route('/api/delete-data_adapter/<int:data_adapter_id>', methods=['DELETE'])
     def delete_data_adapter_api(data_adapter_id: int):
         response = data_adapter_use_case.delete_data_adapter(data_adapter_id)
         return { 'message': response }, 200

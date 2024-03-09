@@ -2,7 +2,7 @@ import time
 import pulsar
 import threading
 from flask import Flask
-from entrypoints.rest.api_rest import api_rest_blueprint
+from entrypoints.api_rest import api_rest_blueprint
 
 app = Flask(__name__)
 

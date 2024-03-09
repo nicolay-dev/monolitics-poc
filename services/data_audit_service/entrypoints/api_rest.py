@@ -1,14 +1,12 @@
-from flask import Flask, jsonify, request
+from flask import Blueprint, Flask, jsonify, request
 import pulsar
 from adapters.property_audit_repository_adapter import PropertyAuditRepositoryAdapter
 from domain.use_cases.property_audit_use_case import PropertyUseCase
 from domain.models.property_audit_model import PropertyAuditModel
 
-
-app = Flask(__name__)
+api_rest_blueprint = Blueprint('api_rest', __name__)
 
 client = pulsar.Client('pulsar://localhost:6650')
-
 producer = client.create_producer('persistent://public/default/comando-propiedades-audit-topic')
 
 property_audit_repository = PropertyAuditRepositoryAdapter()
@@ -16,14 +14,14 @@ property_use_case = PropertyUseCase(property_audit_repository)
 
 class ApiRest:
 
-    @app.route('/api/ping', methods=['GET'])
+    @api_rest_blueprint.route('/api/ping', methods=['GET'])
     def test_api():
         response = 'pong'
         return {
             "response": response
         }
 
-    @app.route('/api/add-property-audit', methods=['POST'])
+    @api_rest_blueprint.route('/api/add-property-audit', methods=['POST'])
     def add_property_api():
         data: dict = request.get_json()
         property_data = PropertyAuditModel(
@@ -41,14 +39,14 @@ class ApiRest:
             "response": response
         }, 200
     
-    @app.route('/api/get-property-audit/<int:id_property>', methods=['GET'])
+    @api_rest_blueprint.route('/api/get-property-audit/<int:id_property>', methods=['GET'])
     def get_property_api(id_property : int):
         property = property_use_case.get_property(id_property)
         return {
             "property": property
         }
     
-    @app.route('/api/update-property-audit', methods=['PUT'])
+    @api_rest_blueprint.route('/api/update-property-audit', methods=['PUT'])
     def update_property_api():
         data: dict = request.get_json()
         property_data = PropertyAuditModel(
@@ -63,14 +61,14 @@ class ApiRest:
             "response": response
         }
     
-    @app.route('/api/get-properties-audit', methods=['GET'])
+    @api_rest_blueprint.route('/api/get-properties-audit', methods=['GET'])
     def get_properties_api():
         properties = property_use_case.get_properties()
         return {
             "properties": properties
         }
 
-    @app.route('/api/delete-properties/<int:id_property>', methods=['DELETE'])
+    @api_rest_blueprint.route('/api/delete-properties/<int:id_property>', methods=['DELETE'])
     def delete_property_api(id_property: int):
         response = property_use_case.delete_property(id_property)
         return { 'message': response }, 200

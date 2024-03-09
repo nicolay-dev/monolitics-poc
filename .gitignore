@@ -4,3 +4,4 @@ __pycache__*
 .venv*
 services/pulsar/data/bookkeeper/*
 services/pulsar/data/zookeeper/*
+HelloWorldThread.txt*
