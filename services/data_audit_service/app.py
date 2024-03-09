@@ -1,6 +1,6 @@
 
 from flask import Flask
-from entrypoints.rest.api_rest import app
+from services.data_audit_service.entrypoints.api_rest import app
 import pulsar
 
 
