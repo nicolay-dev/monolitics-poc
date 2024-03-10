@@ -3,11 +3,13 @@ import pulsar
 from adapters.property_repository_adapter import PropertyRepositoryAdapter
 from domain.use_cases.property_use_case import PropertyUseCase
 from domain.models.property_model import PropertyModel
+import uuid
 
 api_rest_blueprint = Blueprint('api_rest', __name__)
 
 client = pulsar.Client('pulsar://localhost:6650')
-producer = client.create_producer('persistent://public/default/comando-propiedades-topic')
+c_property_tp = client.create_producer('persistent://public/default/comando-property-topic')
+e_property_tp = client.create_producer('persistent://public/default/evento-property-topic')
 
 property_repository = PropertyRepositoryAdapter()
 property_use_case = PropertyUseCase(property_repository)
@@ -22,21 +24,36 @@ class ApiRest:
         }
 
     @api_rest_blueprint.route('/api/add-property', methods=['POST'])
-    def add_property_api():
-        data: dict = request.get_json()
-        property_data = PropertyModel(
-            id_property=data.get('id_property'),
-            external_data = data.get('external_data'),
-            field_research = data.get('field_research'),
-            sales_context = data.get('sales_context'),
-        )
-        response = property_use_case.create_property(property_data)        
-        message = str(data).encode('utf-8')
-        producer.send(message)
-        
-        return {
-            "response": response
-        }, 200
+    def add_property_api():            
+        try:
+            data: dict = request.get_json()
+            property_data = PropertyModel(
+                id_property=data.get('id_property'),
+                external_data=data.get('external_data'),
+                field_research=data.get('field_research'),
+                sales_context=data.get('sales_context'),
+            )
+            response = property_use_case.create_property(property_data)        
+            
+            # Generar un ID único de transacción después de crear la propiedad
+            transaction_id = str(uuid.uuid4())
+            # Agregar el método HTTP a los datos
+            data['method'] = 'POST'
+            # Agregar el ID único de transacción a los datos
+            data['transaction_id'] = transaction_id
+            
+            message = str(data).encode('utf-8')
+            c_property_tp.send(message)
+            e_property_tp.send(message)
+            
+            return {
+                "response": response,
+                "transaction_id": transaction_id
+            }, 200
+        except Exception as e:
+            return {
+                "error": str(e)
+            }, 400
     
     @api_rest_blueprint.route('/api/get-property/<int:id_property>', methods=['GET'])
     def get_property_api(id_property : int):
