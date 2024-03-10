@@ -1,29 +1,18 @@
 from flask import request, jsonify
-from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 from flask_restful import Resource
-from marshmallow import ValidationError
-from modelos import db, User, Project, PersonalProjects, CandidateProjects, PersonalProjectsSchema, ProjectSchemaPost, ProjectSchemaGet, ProfilesProjects
+from modelos import db, User, Project, PersonalProjects
 from hashlib import *
-from modelos.modelos import UserSchemaGet
-from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime, timezone
-from datetime import timedelta
-import os
-import json
-import random
-import string
-import requests
-import hashlib
 
 
-class CreateProject(Resource):
-    @jwt_required()
+
+class Orchestrator(Resource):
+   
     def post(self):
         try:
            
             token = request.headers.get('Authorization')
             #username = request.args.get('username')
-            user_name = get_jwt_identity()
+            user_name = 'abc'
 
             #if token and username:
             if user_name and token:
@@ -63,38 +52,6 @@ class CreateProject(Resource):
         except KeyError as e:
             return {'message': f'Key error: {str(e)}'}, 400
     
-    @jwt_required()    
-    def get(self):
-        try:
-            token = request.headers.get('Authorization')
-            user_name = get_jwt_identity()
-            print(user_name)
-            #if token and username:
-            if user_name and token:
-                request_user = User.query.filter(User.username == user_name).first()
-                if request_user:
-                    projects = Project.query.filter(Project.company_id == request_user.id).all()
-                    if projects:
-                        for project in projects:
-                            
-                            personal_projects = PersonalProjects.query.filter(PersonalProjects.project_id == project.id).all()
-                            
-                            if personal_projects:
-                                project.personal_projects = personal_projects
-                            else:
-                                project.personal_projects = []
-                        project_schema = ProjectSchemaGet(many=True)
-                        return project_schema.dump(projects), 200
-                    else:
-                        return {"message": "No hay proyectos"}, 404
-                else:
-                    return {"message": "Usuario no encontrado"}, 404
-            else:
-                return jsonify({"message": "Falta el token en el encabezado de la solicitud"}), 401
-
-        except KeyError as e:
-            return {'message': f'Key error: {str(e)}'}, 400
-
 
 
 class Ping(Resource):

@@ -5,7 +5,7 @@ from flask_restful import Api
 from dotenv import load_dotenv
 from os import getenv
 from modelos import db
-from vistas import Health, Ping, CreateProject
+from vistas import Health, Ping, Orchestrator
 
 def set_env():
     load_dotenv()
