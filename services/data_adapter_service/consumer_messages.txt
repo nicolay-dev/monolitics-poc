@@ -1,0 +1,4 @@
+{'api_url': 'https://jsonplaceholder.typicode.com/users/4', 'json_keys': ['id', 'name', 'email']}
+{'api_url': 'https://jsonplaceholder.typicode.com/users/3', 'json_keys': ['id', 'name', 'email']}
+{'api_url': 'https://jsonplaceholder.typicode.com/users/2', 'json_keys': ['id', 'name', 'email']}
+{'api_url': 'https://jsonplaceholder.typicode.com/users/9', 'json_keys': ['id', 'name', 'email']}
