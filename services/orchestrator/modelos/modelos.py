@@ -7,7 +7,8 @@ db = SQLAlchemy()
 
 ## Project model
 class Transaction(db.Model):
-    uuid = db.Column(db.String(50), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)  # Clave primaria autoincremental
+    uuid = db.Column(db.String(50), nullable=False)  # Se permite duplicados
     fact = db.Column(db.String(100), nullable=False)
     resource_tp = db.Column(db.String(100), nullable=False)
     destination_tp = db.Column(db.String(100), nullable=False)

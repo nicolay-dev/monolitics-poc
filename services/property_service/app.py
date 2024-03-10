@@ -16,7 +16,7 @@ def write_hello_world():
 
 def consumer_app():
     client = pulsar.Client('pulsar://localhost:6650')
-    subscription_name = 'listener-propiedades-audit-subscription'
+    subscription_name = 'listener-propiedades-audit-subscription-app'
     topic = 'persistent://public/default/comando-data-adapter-topic'
     consumer = client.subscribe(topic, subscription_name)
 
