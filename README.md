@@ -161,3 +161,9 @@ DEBIZIUM: Tiene tabla de transacciones (Manejado por estado) (EventSourcing)
 
 #### [ ] Documentar con la descripción de actividades realizada por cada miembro
 
+para iniciar BFF:
+uvicorn bff_web.main:app --host localhost --port 8003 --reload
+
+docker-compose -f services/debezium-pulsar/docker-compose.yml up
+
+
