@@ -122,15 +122,15 @@ configurado
 Tentativo?:
 *Escenario nuevo?* donde se evidencie la necesidad de escalar ciertos microservicio con alta demanda  (Rendimiento - cuello de botella) para el caso se podría utilizar el servicio de *DataAudit*
 
-#### [ ] Diseñar e implementar 3 microservicios para satisfacer 3 de los escenarios de calidad definidos en la entrega pasada
+#### [✅] Diseñar e implementar 3 microservicios para satisfacer 3 de los escenarios de calidad definidos en la entrega pasada
 
-#### [ ] Desarrollo como mínimo 3 microservicios con comunicación basada en eventos y comandos
+#### [✅] Desarrollo como mínimo 3 microservicios con comunicación basada en eventos y comandos
 
 (Sacar un microservicio genérico que aplique y replicarlos dos veces para el total de tres microservicios)
 
 Cada micro debe estar por capas (cebolla) (Repositorios, lógica, enrutamiento, objetovalor...)
 
-#### [ ] La comunicación de todos los microservicios se hace por medio de comandos y eventos (PULSAR)
+#### [✅] La comunicación de todos los microservicios se hace por medio de comandos y eventos (PULSAR)
 
 Pulsar debe ser configurado ya sea en la infraestructura (AWS o GCP (Como Pub/Sub) o como un componente aparte)
 
@@ -138,15 +138,15 @@ Pulsar debe ser configurado ya sea en la infraestructura (AWS o GCP (Como Pub/Su
 
 #### [✅] Deben ser claros los principios de DDD en el diseño: agregaciones, contextos acotados, inversión de dependencias, capas, etc
 
-#### [ ] Usar Apache Pulsar como broker de eventos
+#### [✅] Usar Apache Pulsar como broker de eventos
 
 (Para la propagación de comandos y eventos, el equipo configuró, desplegó y uso un cluster en Apache Pulsar)
 
-#### [ ] Se justifica correctamente los tipos de eventos a utilizar (integración o carga de estado). Ello incluye la definición de los esquemas y evolución de los mismos (Documentar)
+#### [✅] Se justifica correctamente los tipos de eventos a utilizar (integración o carga de estado). Ello incluye la definición de los esquemas y evolución de los mismos (Documentar)
 
-#### [ ] Definir, justificar e implementar alguna de las topologías para la administración de datos descentralizada o híbrida
+#### [✅] Definir, justificar e implementar alguna de las topologías para la administración de datos descentralizada o híbrida
 
-#### [ ] Definir e implementar un modelo *CRUD* o Event Sourcing en la capa de datos en al menos 3 de los servicios
+#### [✅] Definir e implementar un modelo *CRUD* o Event Sourcing en la capa de datos en al menos 3 de los servicios
 
 Nota:
 DEBIZIUM: Tiene tabla de transacciones (Manejado por estado) (EventSourcing)
@@ -157,9 +157,9 @@ DEBIZIUM: Tiene tabla de transacciones (Manejado por estado) (EventSourcing)
 
 [Repositorio](https://github.com/nicolay-dev/monolitics-poc)
 
-#### [ ] Grabar video
+#### [✅ ] Grabar video
 
-#### [ ] Documentar con la descripción de actividades realizada por cada miembro
+#### [✅] Documentar con la descripción de actividades realizada por cada miembro
 
 para iniciar BFF:
 uvicorn bff_web.main:app --host localhost --port 8003 --reload
