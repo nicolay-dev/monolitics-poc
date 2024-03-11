@@ -47,9 +47,9 @@ Se identifican dos cuellos de botella importantes para los servicios de *Propert
 
 ## Escenarios de calidad a probar
 
-### **Escenario 1:** Alta Concurrencia en Eventos de Dominio (Refined by Nicolay)
+### **Escenario 1:** Alta Demanda en Eventos de Dominio (Refined by Nicolay)
 
-- *Descripción:* Tiempo de respuesta en el servicio - de *Propiedades* debe
+- *Descripción:* Tiempo de respuesta en el servicio - de *Propiedades* debe soportar alta demanda en Eventos de Dominio
 - *Estímulo:* Alto volumen transaccional a nivel de operaciones requeridas por el servicio de Propiedades
 - *Ambiente:* Operación bajo estrés
 - *Artefacto:* Microservicio de Propiedades, Broker
