@@ -55,23 +55,22 @@ class ApiRest:
                 "error": str(e)
             }, 400
     
-    @api_rest_blueprint.route('/api/get-property/<int:id_property>', methods=['GET'])
-    def get_property_api(id_property : int):
+    @api_rest_blueprint.route('/api/get-property/<id_property>', methods=['GET'])
+    def get_property_api(id_property : str):
         property = property_use_case.get_property(id_property)
         return {
             "property": property
         }
     
-    @api_rest_blueprint.route('/api/update-property', methods=['PUT'])
-    def update_property_api():
+    @api_rest_blueprint.route('/api/update-property/<id_property>', methods=['PUT'])
+    def update_property_api(id_property : str):
         data: dict = request.get_json()
         property_data = PropertyModel(
-            id_property= data.get('id_property'),
             external_data = data.get('external_data'),
             field_research = data.get('field_research'),
             sales_context = data.get('sales_context'),
         )
-        response = property_use_case.update_property(property_data)
+        response = property_use_case.update_property(id_property, property_data)
         return {
             "response": response
         }
@@ -83,7 +82,7 @@ class ApiRest:
             "properties": properties
         }
 
-    @api_rest_blueprint.route('/api/delete-properties/<int:id_property>', methods=['DELETE'])
-    def delete_property_api(id_property: int):
+    @api_rest_blueprint.route('/api/delete-properties/<id_property>', methods=['DELETE'])
+    def delete_property_api(id_property: str):
         response = property_use_case.delete_property(id_property)
         return { 'message': response }, 200

@@ -9,29 +9,24 @@ class PropertyRepositoryAdapter(PropertyRepository):
     def create_property(self, property: PropertyModel) -> PropertyModel:
         try:
             db_es = PropertyEntity(
-                id_property = property.id_property,
+                # id_property = property.id_property,
                 external_data = property.external_data,
                 field_research = property.field_research,
                 sales_context = property.sales_context
             )
             db.add(db_es)
             db.commit()
-            return property.to_dict()
+            return db_es.to_dict()
         except Exception as exception:
             raise NameError(
                 f'Ha ocurrido un error creando la propiedad, revisar {exception}'
             )
 
-    def get_property_by_id(self, id_property: int) -> PropertyModel:
+    def get_property_by_id(self, id_property: str) -> PropertyModel:
         try:
             db_es = (db.query(PropertyEntity).filter(PropertyEntity.id_property == id_property).first())
             if db_es is not None:
-                return PropertyModel(
-                    id_property=db_es.id_property,
-                    external_data=db_es.external_data,
-                    field_research=db_es.field_research,
-                    sales_context=db_es.sales_context,
-                ).to_dict()
+                return db_es.to_dict()
             return None
         except Exception as exception:
             raise NameError(
@@ -42,27 +37,18 @@ class PropertyRepositoryAdapter(PropertyRepository):
         try:
             db_es = db.query(PropertyEntity).all()
             return [
-                PropertyModel(
-                    id_property = es.id_property,
-                    external_data = es.external_data,
-                    field_research = es.field_research,
-                    sales_context = es.sales_context
-                ).to_dict()
+                es.to_dict()
                 for es in db_es
             ]
-            
-            
-            db.add(db_es)
-            db.commit()
         except Exception as exception:
             raise NameError(
                 f'Ha ocurrido un error obteniendo las propiedades, revisar {exception}'
             )
 
-    def update_property(self, property: PropertyModel) -> PropertyModel:
+    def update_property(self, id_property: str, property: PropertyModel) -> PropertyModel:
         try:
 
-            db_es = (db.query(PropertyEntity).filter(PropertyEntity.id_property == property.id_property).first())
+            db_es = (db.query(PropertyEntity).filter(PropertyEntity.id_property == id_property).first())
 
             db_es.id_property = db_es.id_property
             db_es.external_data = property.external_data
@@ -70,12 +56,14 @@ class PropertyRepositoryAdapter(PropertyRepository):
             db_es.sales_context = property.sales_context
             db.commit()
 
+            return db_es.to_dict()
+
         except Exception as exception:
             raise NameError(
                 f'Ha ocurrido un error actualizando la propiedad, revisar {exception}'
             )
 
-    def delete_property(self, id_property: int):
+    def delete_property(self, id_property: str):
         try:
 
             db_es = (db.query(PropertyEntity).filter(PropertyEntity.id_property == id_property).first())

@@ -10,14 +10,14 @@ class PropertyUseCase:
     def create_property(self, property: PropertyModel) -> PropertyModel:
         return self.property_repository.create_property(property)
 
-    def get_property(self, id_property: int) -> PropertyModel:
+    def get_property(self, id_property: str) -> PropertyModel:
         return self.property_repository.get_property_by_id(id_property)
 
     def get_properties(self) -> PropertyModel:
         return self.property_repository.get_properties()
 
-    def update_property(self, property: PropertyModel) -> PropertyModel:
-        return self.property_repository.update_property(property)
+    def update_property(self, id_property: str, property: PropertyModel) -> PropertyModel:
+        return self.property_repository.update_property(id_property, property)
 
-    def delete_property(self, id_property: int) -> bool:
+    def delete_property(self, id_property: str) -> bool:
         return self.property_repository.delete_property(id_property)

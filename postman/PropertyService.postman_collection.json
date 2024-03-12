@@ -26,7 +26,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/ping",
+					"raw": "http://127.0.0.1:5001/api/ping",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -34,7 +34,7 @@
 						"0",
 						"1"
 					],
-					"port": "5000",
+					"port": "5001",
 					"path": [
 						"api",
 						"ping"
@@ -63,7 +63,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/get-property/1",
+					"raw": "http://127.0.0.1:5001/api/get-property/2",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -71,11 +71,11 @@
 						"0",
 						"1"
 					],
-					"port": "5000",
+					"port": "5001",
 					"path": [
 						"api",
 						"get-property",
-						"1"
+						"2"
 					]
 				},
 				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
@@ -101,7 +101,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/get-properties",
+					"raw": "http://127.0.0.1:5001/api/get-properties",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -109,7 +109,7 @@
 						"0",
 						"1"
 					],
-					"port": "5000",
+					"port": "5001",
 					"path": [
 						"api",
 						"get-properties"
@@ -140,7 +140,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id_property\": 3,\n\t\"external_data\" : \"data.get('external_data')\",\n    \"field_research\" :\"data.get('field_research')\",\n    \"sales_context\" : \"data.get('sales_context')\"\n}",
+					"raw": "{\n    \"external_data\": \"data.get('external_data')\",\n    \"field_research\": \"data.get('field_research')\",\n    \"sales_context\": \"data.get('sales_context')\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -148,7 +148,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/add-property",
+					"raw": "http://127.0.0.1:5001/api/add-property",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -156,7 +156,7 @@
 						"0",
 						"1"
 					],
-					"port": "5000",
+					"port": "5001",
 					"path": [
 						"api",
 						"add-property"
@@ -187,7 +187,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id_property\": 1,\n\t\"external_data\" : \"nuevo nuevo\",\n    \"field_research\" :\"data.get('field_research')\",\n    \"sales_context\" : \"data.get('sales_context')\"\n}",
+					"raw": "{\n\t\"external_data\" : \"nuevo nuevo 2\",\n    \"field_research\" :\"data.get('field_research')\",\n    \"sales_context\" : \"data.get('sales_context')\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -195,7 +195,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/update-property",
+					"raw": "http://127.0.0.1:5001/api/update-property/7",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -203,10 +203,11 @@
 						"0",
 						"1"
 					],
-					"port": "5000",
+					"port": "5001",
 					"path": [
 						"api",
-						"update-property"
+						"update-property",
+						"7"
 					]
 				},
 				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
@@ -242,7 +243,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/delete-properties/2",
+					"raw": "http://127.0.0.1:5001/api/delete-properties/2",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -250,7 +251,7 @@
 						"0",
 						"1"
 					],
-					"port": "5000",
+					"port": "5001",
 					"path": [
 						"api",
 						"delete-properties",

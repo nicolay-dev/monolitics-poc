@@ -38,7 +38,7 @@ def api_rest():
     app.run(host = '0.0.0.0', port=8080, debug=True)
 
 if __name__ == 'app':
-    threading.Thread(target=consumer_app, daemon=True).start()
+    # threading.Thread(target=consumer_app, daemon=True).start()
     threading.Thread(target=api_rest, daemon=True).start()
     
     ## Prueba que los hilos Funcionan escribiendo en archivo 
