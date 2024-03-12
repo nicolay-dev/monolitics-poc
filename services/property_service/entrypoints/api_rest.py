@@ -28,7 +28,6 @@ class ApiRest:
         try:
             data: dict = request.get_json()
             property_data = PropertyModel(
-                id_property=data.get('id_property'),
                 external_data=data.get('external_data'),
                 field_research=data.get('field_research'),
                 sales_context=data.get('sales_context'),
